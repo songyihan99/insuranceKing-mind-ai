@@ -383,6 +383,14 @@ SYSTEM_INSTRUCTION = """
 - 아래 4개 섹션을 각각 `<div class="ai-section">` … `</div>` 로 감싼다.
 - 각 섹션 제목은 `<h4>` 한 줄로 딱 아래 문구와 일치하게 쓴다 (이모지 포함).
 
+## 섹션별 출력 분량 (필수)
+- **짧고 강하게 핵심만 써라. 설명이 길어질수록 설계사가 현장에서 못 쓴다. 한 섹션에 문장이 3개를 넘으면 안 된다.**
+- 분량은 제목(`<h4>`)과 【멘트】…【/멘트】를 제외한 **본문 해설 문장**만 센다. 문장 1개는 `<p>` 1개 또는 `<li>` 1개로 끊어 써라.
+- 섹션1(속마음 진단): 본문 **3문장 이내**
+- 섹션2(스토리텔링): 본문 **3문장 이내**
+- 섹션3(클로징): 본문 **2문장 이내**
+- 섹션4(무기): **상품명 1문장 + 핵심특약 1문장 + 추천이유 1문장**만(각 1문장씩, 총 3문장). 장황한 나열·부가 설명 금지.
+
 ## 가독성·줄바꿈 설계 (필수)
 - 결과 문장은 화면에서 단어 단위로 예쁘게 떨어지도록, 의미 덩어리(띄어쓰기 단위)를 기준으로 짧게 끊어 써라.
 - 한 `<p>` 안에 너무 긴 문장 1개만 쓰지 말고, 2~3개의 짧은 문장으로 나눠 읽기 쉽게 구성하라.
@@ -400,6 +408,7 @@ SYSTEM_INSTRUCTION = """
 - 섹션4: 상품·특약 설명은 일반. 고객에게 말할 **제안 멘트**만 【멘트】.
 
 ### 섹션 1 → `<h4>🔴 [고객의 진짜 속마음 진단]</h4>`
+- 본문 해설은 **3문장 이내**로 압축한다(위 분량 규칙 준수).
 - 거절 멘트로 위 6대 감정 축 중 가장 강하게 발동한 최상위 감정 1가지를 판정한다.
 - 판정 유형은 **모험형·지배형·통제형·균형형·자극형·개방형** 중 정확한 이름 1개를 섹션1 본문에 반드시 1회 쓴다(예: `균형형`).
 - 그 외 설명은 일상어로 풀되, 위 6개 유형명 이외의 축 이름(모험·규율 등 단독 표기)은 쓰지 마라.
@@ -409,6 +418,7 @@ SYSTEM_INSTRUCTION = """
 - 고객에게 말할 직접 멘트만 【멘트】…【/멘트】 로 분리(위 규칙 준수).
 
 ### 섹션 2 → `<h4>🧠 [신뢰를 구축하는 1초 스토리텔링]</h4>`
+- 본문 해설은 **3문장 이내**로 압축한다(위 분량 규칙 준수).
 - 설계사가 그대로 읽을 대화체 멘트는 모두 【멘트】…【/멘트】 로 감싼다.
 - 정형화된 서술형 문장(훈계·교과서 톤) 절대 금지.
 - 고객의 나이·성별·직업·현재 제안 상품군·거절 이유에 맞춘 가족 또는 직계 지인의 리모델링 경험을 떠올리게 하는 체험형 사례, 또는 익명화된 유사 사례를 매번 새로 구성하라.
@@ -421,6 +431,7 @@ SYSTEM_INSTRUCTION = """
 - 마지막 한두 문장은 고객이 스스로 비교 판단할 수 있게 “무엇을 확인하면 되는지”를 자연스럽게 짚어라.
 
 ### 섹션 3 → `<h4>💸 [부담을 0으로 만드는 쿨한 클로징]</h4>`
+- 본문 해설은 **2문장 이내**로 압축한다(위 분량 규칙 준수).
 - 먼저 비용 비교의 기준점을 투명하게 제시한다. 예: 현재 내는 보험료 대비 비어 있는 보장, 같은 월 부담 안에서 보완 가능한 항목, 기존 보장과 새 제안의 차이.
 - 실제 보험료를 모르면 금액을 지어내지 말고, 월 부담 수준과 보장 범위를 비교하는 기준만 설명한다.
 - 고객이 가격 저항을 이해할 수 있도록 "왜 이 비용이 추가 지출이 아니라 보장 구조 점검인지"를 담백하게 풀어라.
@@ -430,6 +441,7 @@ SYSTEM_INSTRUCTION = """
 - 매번 문장 길이/끊어 읽기/멘트 배치를 바꿔서, 복붙 같은 느낌이 나지 않게 써라.
 
 ### 섹션 4 → `<h4>🟢 [한화손해만의 치명적인 무기]</h4>`
+- 본문 해설은 **상품명 1문장 + 핵심특약 1문장 + 추천이유 1문장**만 쓴다(각 1문장, 총 3문장).
 - 반드시 "한화 실시간 상품 장부 데이터"의 **[최종 매칭 후보 - 섹션4 전용]** 블록에 있는 상품만 추천한다. 다른 카테고리 상품은 절대 끌어오지 마라.
 - 장부에 안내된 **2단계 필터링**을 그대로 따른다:
   * 1차: 확정 상품 카테고리와 일치하는 상품만 후보로 인정.
@@ -468,6 +480,10 @@ LIMBIC_TYPE_WORD_RE = re.compile(
 AI_SECTION_BLOCK_RE = re.compile(
     r'<div\s+class=["\']ai-section["\']\s*>(.*?)</div>',
     re.DOTALL | re.IGNORECASE,
+)
+AI_SECTION_OPEN_RE = re.compile(
+    r'<div\s+class=["\']ai-section["\']\s*>',
+    re.IGNORECASE,
 )
 AI_SECTION_H4_RE = re.compile(r"(<h4>.*?</h4>)", re.DOTALL | re.IGNORECASE)
 AI_SECTION_CONTENT_UNIT_RE = re.compile(
@@ -995,22 +1011,76 @@ def repair_ai_html_display(html: str) -> str:
     return result
 
 
+def _balanced_ai_section_blocks(html: str) -> list[tuple[int, int, str]]:
+    """중첩 div(fp-ment-box 등)를 고려해 ai-section 블록 전체를 추출한다."""
+    blocks: list[tuple[int, int, str]] = []
+    for match in AI_SECTION_OPEN_RE.finditer(html):
+        start = match.start()
+        pos = match.end()
+        depth = 1
+        while pos < len(html) and depth > 0:
+            next_open = html.lower().find("<div", pos)
+            next_close = html.lower().find("</div>", pos)
+            if next_close == -1:
+                break
+            if next_open != -1 and next_open < next_close:
+                depth += 1
+                pos = html.find(">", next_open) + 1
+            else:
+                depth -= 1
+                pos = next_close + len("</div>")
+                if depth == 0:
+                    blocks.append((start, pos, html[start:pos]))
+                    break
+    return blocks
+
+
+def _inner_from_ai_section_block(block: str) -> str:
+    open_match = AI_SECTION_OPEN_RE.search(block)
+    if not open_match:
+        return block
+    close_idx = block.lower().rfind("</div>")
+    if close_idx == -1:
+        return block[open_match.end() :].strip()
+    return block[open_match.end() : close_idx].strip()
+
+
 def apply_direct_ment_bold(ai_html: str) -> str:
     """각 ai-section 직접 멘트를 💬 파란 강조 박스로 표시한다."""
+    section_blocks = _balanced_ai_section_blocks(ai_html)
+    if not section_blocks:
+        def transform_section(match: re.Match[str]) -> str:
+            inner = match.group(1)
+            h4_match = AI_SECTION_H4_RE.search(inner)
+            if not h4_match:
+                return match.group(0)
+            header = h4_match.group(1)
+            section_body = inner[h4_match.end() :]
+            return (
+                f'<div class="ai-section">{header}'
+                f"{_apply_fp_ment_boxes_in_section_body(section_body, header)}</div>"
+            )
 
-    def transform_section(match: re.Match[str]) -> str:
-        inner = match.group(1)
+        return AI_SECTION_BLOCK_RE.sub(transform_section, ai_html)
+
+    rebuilt: list[str] = []
+    cursor = 0
+    for start, end, block in section_blocks:
+        rebuilt.append(ai_html[cursor:start])
+        inner = _inner_from_ai_section_block(block)
         h4_match = AI_SECTION_H4_RE.search(inner)
         if not h4_match:
-            return match.group(0)
-        header = h4_match.group(1)
-        section_body = inner[h4_match.end() :]
-        return (
-            f'<div class="ai-section">{header}'
-            f"{_apply_fp_ment_boxes_in_section_body(section_body, header)}</div>"
-        )
-
-    return AI_SECTION_BLOCK_RE.sub(transform_section, ai_html)
+            rebuilt.append(block)
+        else:
+            header = h4_match.group(1)
+            section_body = inner[h4_match.end() :]
+            rebuilt.append(
+                f'<div class="ai-section">{header}'
+                f"{_apply_fp_ment_boxes_in_section_body(section_body, header)}</div>"
+            )
+        cursor = end
+    rebuilt.append(ai_html[cursor:])
+    return "".join(rebuilt)
 
 
 def _split_section_preview_and_more(body: str) -> tuple[str, str | None]:
@@ -1032,11 +1102,15 @@ def _split_section_preview_and_more(body: str) -> tuple[str, str | None]:
     return preview_html, more_html
 
 
-def _ai_section_to_html(inner: str) -> str:
-    """ai-section 1개 HTML(접을 섹션은 details/summary 더보기)."""
+def _render_ai_section(inner: str, section_idx: int) -> None:
+    """ai-section 1개를 렌더링(접을 섹션은 st.expander 더보기)."""
     h4_match = AI_SECTION_H4_RE.search(inner)
     if not h4_match:
-        return f'<div class="ai-section">{inner}</div>'
+        st.markdown(
+            f'<div class="ai-section">{inner}</div>',
+            unsafe_allow_html=True,
+        )
+        return
 
     header = h4_match.group(1)
     body = inner[h4_match.end() :].strip()
@@ -1044,85 +1118,49 @@ def _ai_section_to_html(inner: str) -> str:
     if _is_collapsible_ai_section(inner):
         preview_html, more_html = _split_section_preview_and_more(body)
         if more_html:
-            return (
-                f'<div class="ai-section">{header}'
-                f'<div class="ai-section-preview">{preview_html}</div>'
-                '<details class="ai-section-expand">'
-                '<summary class="ai-section-expand-btn">'
-                '<span class="expand-label-more">더보기</span>'
-                '<span class="expand-label-less">접기</span>'
-                "</summary>"
-                f'<div class="ai-section-more-body">{more_html}</div>'
-                "</details></div>"
+            st.markdown(
+                f'<div class="ai-section">{header}{preview_html}</div>',
+                unsafe_allow_html=True,
             )
+            with st.expander("더보기", expanded=False, key=f"ai_section_more_{section_idx}"):
+                st.markdown(
+                    f'<div class="ai-section-more-body">{more_html}</div>',
+                    unsafe_allow_html=True,
+                )
+            return
 
-    return f'<div class="ai-section">{header}{body}</div>'
+    st.markdown(
+        f'<div class="ai-section">{header}{body}</div>',
+        unsafe_allow_html=True,
+    )
 
 
 def render_analysis_result(ai_body: str, limbic_cards_html: str) -> None:
-    """분석 결과를 result-panel 하나의 HTML 블록으로 렌더링한다."""
+    """분석 결과를 st.markdown + st.expander로 렌더링한다."""
     if not (ai_body or "").strip():
         return
 
-    section_open_re = re.compile(
-        r'<div\s+class=["\']ai-section["\']\s*>',
-        re.IGNORECASE,
+    st.markdown(
+        '<div class="result-panel"><div class="ai-output-root">'
+        f"{DASHBOARD_HTML}"
+        f"{limbic_cards_html}",
+        unsafe_allow_html=True,
     )
-
-    def _balanced_ai_section_blocks(html: str) -> list[tuple[int, int, str]]:
-        """중첩 div(fp-ment-box 등)를 고려해 ai-section 블록 전체를 추출한다."""
-        blocks: list[tuple[int, int, str]] = []
-        for match in section_open_re.finditer(html):
-            start = match.start()
-            pos = match.end()
-            depth = 1
-            while pos < len(html) and depth > 0:
-                next_open = html.lower().find("<div", pos)
-                next_close = html.lower().find("</div>", pos)
-                if next_close == -1:
-                    break
-                if next_open != -1 and next_open < next_close:
-                    depth += 1
-                    pos = html.find(">", next_open) + 1
-                else:
-                    depth -= 1
-                    pos = next_close + len("</div>")
-                    if depth == 0:
-                        blocks.append((start, pos, html[start:pos]))
-                        break
-        return blocks
-
-    def _section_inner(block: str) -> str:
-        open_match = section_open_re.search(block)
-        if not open_match:
-            return block
-        close_idx = block.lower().rfind("</div>")
-        if close_idx == -1:
-            return block[open_match.end() :].strip()
-        return block[open_match.end() : close_idx].strip()
-
-    html_parts: list[str] = [
-        '<div class="result-panel"><div class="ai-output-root">',
-        DASHBOARD_HTML,
-        limbic_cards_html,
-    ]
 
     section_blocks = _balanced_ai_section_blocks(ai_body)
     if section_blocks:
-        last_end = 0
-        for start, end, block in section_blocks:
-            last_end = end
-            html_parts.append(_ai_section_to_html(_section_inner(block)))
-        remainder = ai_body[last_end:].strip()
-        if remainder and "byaf-tip-box" not in remainder.lower():
-            html_parts.append(remainder)
+        for section_idx, (_start, _end, block) in enumerate(section_blocks):
+            _render_ai_section(_inner_from_ai_section_block(block), section_idx)
     else:
-        html_parts.append(f'<div class="ai-section">{ai_body}</div>')
+        st.markdown(
+            f'<div class="ai-section">{ai_body}</div>',
+            unsafe_allow_html=True,
+        )
 
-    html_parts.append(CLOSING_TIP_HTML)
-    html_parts.append("</div></div>")
-
-    st.markdown("".join(html_parts), unsafe_allow_html=True)
+    st.markdown(
+        f"{CLOSING_TIP_HTML}</div></div>",
+        unsafe_allow_html=True,
+    )
 
 
 def render_ai_result_html(html_content: str, height: int = 1280) -> None:
@@ -1627,8 +1665,8 @@ with col_result:
         ai_body = strip_limbic_type_marker(ai_body)
         ai_body = apply_definitive_tone(ai_body)
         ai_body = strip_section_h4_subtitles(ai_body)
-        ai_body = apply_direct_ment_bold(ai_body)
         ai_body = repair_ai_html_display(ai_body)
+        ai_body = apply_direct_ment_bold(ai_body)
         limbic_cards_html = build_limbic_axis_cards_html(limbic_type)
         render_analysis_result(ai_body, limbic_cards_html)
     else:
