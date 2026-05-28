@@ -118,6 +118,7 @@ st.markdown(
     }
     .result-panel h3 {
         color: #1a1a1a;
+        font-size: 1.2rem;
         font-weight: 800;
         letter-spacing: -0.03em;
         margin-top: 0;
@@ -584,9 +585,9 @@ FP_MENT_ANALYSIS_KEYWORDS = (
 )
 
 DASHBOARD_HTML = (
-    "<h3>🎯 AI 거절 처리 가이드: "
-    "<span style='color:#d32f2f;'>🔴 속마음 방어벽 해제 완료</span> / "
-    "<span style='color:#2e7d32;'>🟢 맞춤형 현장 멘트 제공</span></h3>"
+    "<h3 style='font-size:1.0rem;'>🎯 AI 거절 처리 가이드: "
+    "<span style='color:#d32f2f;'>🔴 속마음 방어벽 해제</span> / "
+    "<span style='color:#2e7d32;'>🟢 맞춤 멘트 제공</span></h3>"
     "<hr>"
 )
 
