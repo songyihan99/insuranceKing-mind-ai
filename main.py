@@ -392,7 +392,7 @@ SYSTEM_INSTRUCTION = """
 
 ## 섹션별 출력 분량 (필수)
 - **짧고 강하게 핵심만 써라. 설명이 길어질수록 설계사가 현장에서 못 쓴다. 한 섹션에 문장이 3개를 넘으면 안 된다.**
-- 분량은 제목(`<h4>`)과 【멘트】…【/멘트】를 제외한 **본문 해설 문장**만 센다. 문장 1개는 `<p>` 1개 또는 `<li>` 1개로 끊어 써라.
+- 분량은 제목(`<h4>`)과 `fp-ment-box` 블록을 제외한 **본문 해설 문장**만 센다. 문장 1개는 `<p>` 1개 또는 `<li>` 1개로 끊어 써라.
 - 섹션1(속마음 진단): 본문 **3문장 이내**
 - 섹션2(스토리텔링): 본문 **3문장 이내**
 - 섹션3(클로징): 본문 **2문장 이내**
@@ -406,13 +406,22 @@ SYSTEM_INSTRUCTION = """
 - 각 ai-section 본문은 스크롤 없이 한눈에 읽히도록 문단 간 여백을 살려 작성하라.
 
 ## 직접 멘트 박스 (필수 — 4개 섹션 공통)
-- 설계사(FP)가 고객에게 **그대로 읽어 말할 문장**만 【멘트】…【/멘트】 로 감싼다. (멘트 1덩어리당 1쌍)
-- `fp-ment-box`, `direct-ment`, HTML class명·태그 설명 문구는 **절대 출력하지 마라.**
-- 고객이 한 **거절 멘트 인용**, 오해/확인 포인트 설명, 분석·진단 문장은 【멘트】로 감싸지 마라.
-- 분석·해설·배경·라벨 설명은 일반 `<p>` 텍스트만 쓴다.
-- 섹션1: 진단 해설은 일반. 고객에게 건넬 공감·확인 **대화 멘트**만 【멘트】 사용.
-- 섹션2·3: 사례 도입·해설은 일반. 설계사가 읽을 **대화체 멘트**만 【멘트】.
-- 섹션4: 상품·특약 설명은 일반. 고객에게 말할 **제안 멘트**만 【멘트】.
+- 설계사(FP)가 고객에게 **그대로 읽어 말할 문장**은 【멘트】 마커 없이, 아래 HTML을 **그대로** 출력한다(멘트 1덩어리당 박스 1개).
+- `fp-ment-text` 안에는 **멘트 문장만** 넣고, 분석·해설·진단·상품 설명은 일반 `<p>` 텍스트만 쓴다.
+- 고객 **거절 멘트 인용**, 오해/확인 포인트 설명은 박스에 넣지 마라.
+- HTML 템플릿(클래스명·태그 구조 변경 금지, `멘트 내용`만 실제 멘트로 치환):
+
+<div class="fp-ment-box">
+<div class="fp-ment-header">
+<span class="fp-ment-icon">💬</span>
+<span class="fp-ment-label">설계사 직접 멘트</span>
+</div>
+<div class="fp-ment-text">멘트 내용</div>
+</div>
+
+- 섹션1: 진단 해설은 `<p>`. 고객에게 건넬 공감·확인 **대화 멘트**만 위 박스 HTML 사용.
+- 섹션2·3: 사례·해설은 `<p>`. 설계사가 읽을 **대화체 멘트**만 위 박스 HTML 사용.
+- 섹션4: 상품·특약 설명은 `<p>`. 고객에게 말할 **제안 멘트**만 위 박스 HTML 사용.
 
 ### 섹션 1 → `<h4>🔴 [고객의 진짜 속마음 진단]</h4>`
 - 본문 해설은 **3문장 이내**로 압축한다(위 분량 규칙 준수).
@@ -422,11 +431,11 @@ SYSTEM_INSTRUCTION = """
 - 고객 프로필(이름, 나이, 직업)을 콕 집어 개인 맞춤으로 진단 (과장·조롱 없이).
 - 반드시 고객이 주저하는 이유를 `오해 포인트`와 `확인 포인트`로 나눠 투명하게 짚는다.
 - 바넘 효과처럼 두루뭉술한 단정 대신, 정교한 맞춤형 공감으로 설명한다.
-- 고객에게 말할 직접 멘트만 【멘트】…【/멘트】 로 분리(위 규칙 준수).
+- 고객에게 말할 직접 멘트만 위 fp-ment-box HTML로 출력(위 규칙 준수).
 
 ### 섹션 2 → `<h4>🧠 [신뢰를 구축하는 1초 스토리텔링]</h4>`
 - 본문 해설은 **3문장 이내**로 압축한다(위 분량 규칙 준수).
-- 설계사가 그대로 읽을 대화체 멘트는 모두 【멘트】…【/멘트】 로 감싼다.
+- 설계사가 그대로 읽을 대화체 멘트는 모두 fp-ment-box HTML로 출력한다.
 - 정형화된 서술형 문장(훈계·교과서 톤) 절대 금지.
 - 고객의 나이·성별·직업·현재 제안 상품군·거절 이유에 맞춘 가족 또는 직계 지인의 리모델링 경험을 떠올리게 하는 체험형 사례, 또는 익명화된 유사 사례를 매번 새로 구성하라.
 - 질병/사고 공포를 자극하거나 비극을 과장하지 말고, "어떻게 보장의 빈틈을 점검하고 자산을 안정적으로 방어했는지"에 초점을 둔다.
@@ -443,7 +452,7 @@ SYSTEM_INSTRUCTION = """
 - 실제 보험료를 모르면 금액을 지어내지 말고, 월 부담 수준과 보장 범위를 비교하는 기준만 설명한다.
 - 고객이 가격 저항을 이해할 수 있도록 "왜 이 비용이 추가 지출이 아니라 보장 구조 점검인지"를 담백하게 풀어라.
 - 마지막은 반드시 자율 선택을 보장하는 대화체로 마무리하라. 예: 다른 회사와 비교해도 괜찮고, 다만 어떤 기준만은 꼭 확인해 보시라는 식의 중립적 안내.
-- 고객에게 읽을 클로징 멘트는 【멘트】…【/멘트】 로 분리, 비용 비교 해설은 일반 텍스트.
+- 고객에게 읽을 클로징 멘트는 fp-ment-box HTML로 출력, 비용 비교 해설은 일반 텍스트.
 - 가입 독촉, 압박, 조급함 유도는 금지.
 - 매번 문장 길이/끊어 읽기/멘트 배치를 바꿔서, 복붙 같은 느낌이 나지 않게 써라.
 
@@ -463,7 +472,7 @@ SYSTEM_INSTRUCTION = """
   3) 왜 이 특약이 해당 거절·카테고리 맥락에 맞는지(고객 프로필 맞춤 이유)
 - `Priority: High` 상품은 장부 매칭 근거와 고객 맥락에 맞는 추천 이유만 설명하라.
 - 장부 기반 근거를 짧고 강하게 제시한다. 가입 압박은 금지.
-- 고객에게 말할 제안 멘트는 【멘트】…【/멘트】 로 분리, 상품·특약 설명 문장은 일반 텍스트.
+- 고객에게 말할 제안 멘트는 fp-ment-box HTML로 출력, 상품·특약 설명 문장은 일반 텍스트.
 
 ## 금지 사항
 - 마크다운 문법(해시태그 헤더, 별표 강조, 코드펜스) 사용 금지 — 순수 HTML만
@@ -472,7 +481,7 @@ SYSTEM_INSTRUCTION = """
 - 심리 조작, 가스라이팅, 편향 자극 표현 금지
 - **「본사 전략 우선 상품으로도 분류됩니다」** 및 이와 유사한 표현 전부 금지
   (예: "본사 전략 우선 상품", "전략 우선 상품으로 분류", "우선 전략 상품입니다" 등 — 출력에 한 글자도 넣지 마라)
-- `direct-ment`, `fp-ment-box`, `class="..."` 등 HTML 클래스명·깨진 태그 조각 출력 금지
+- `direct-ment` 및 깨진 HTML 태그 조각(열리지 않은 `>` 잔여 등) 출력 금지. fp-ment-box는 위 템플릿 구조로만 출력.
 """
 
 LIMBIC_AXIS_TYPES = ("모험형", "지배형", "통제형", "균형형", "자극형", "개방형")
@@ -528,10 +537,6 @@ HEDGING_TONE_REPLACEMENTS: tuple[tuple[str, str], ...] = (
     ("것 같아요", "습니다"),
 )
 
-DIRECT_MENT_MARKER_RE = re.compile(
-    r"【\s*멘트\s*】\s*(.*?)\s*【\s*/\s*멘트\s*】",
-    re.DOTALL | re.IGNORECASE,
-)
 DIRECT_MENT_STRONG_RE = re.compile(
     r"<strong[^>]*\bdirect-ment\b[^>]*>(.*?)</strong>",
     re.DOTALL | re.IGNORECASE,
@@ -549,18 +554,12 @@ FP_MENT_BOX_BLOCK_RE = re.compile(
     r'<div\s+class=["\']fp-ment-box["\']\s*>[\s\S]*?</div>\s*</div>\s*</div>',
     re.IGNORECASE,
 )
-DIRECT_MENT_QUOTE_RES: tuple[tuple[re.Pattern[str], int], ...] = (
-    (re.compile(r"「([^」]+)」"), 1),
-    (re.compile(r"『([^』]+)』"), 1),
-    (re.compile(r'"([^"]+)"'), 1),
-    (re.compile(r"“([^”]+)”"), 1),
-)
 H4_PAREN_SUBTITLE_RE = re.compile(
     r"(<h4>[^<]+?)\s*\([^)]*\)(\s*</h4>)",
     re.IGNORECASE,
 )
 HTML_ARTIFACT_RE = re.compile(
-    r"(?:fp-ment-(?:box|text|header|icon|label)|ai-section-[a-z-]+)\s*\">|"
+    r"(?:ai-section-[a-z-]+)\s*\">|"
     r"\bdirect-ment\b\s*>",
     re.IGNORECASE,
 )
@@ -926,27 +925,6 @@ def _sanitize_direct_ment_artifacts(html: str) -> str:
     return result
 
 
-def _wrap_fp_ment_quotes(fragment: str) -> str:
-    """따옴표 멘트 중 설계사 직접 대화만 fp-ment-box로 변환한다."""
-    result = fragment
-    for pattern, group_idx in DIRECT_MENT_QUOTE_RES:
-
-        def quote_replacer(match: re.Match[str]) -> str:
-            quoted = match.group(group_idx)
-            if not quoted or not quoted.strip():
-                return match.group(0)
-            if not _is_fp_direct_speech(quoted):
-                return match.group(0)
-            start = match.start()
-            prefix = result[:start]
-            if 'class="fp-ment-box"' in prefix or "fp-ment-text" in prefix:
-                return match.group(0)
-            return build_fp_ment_box(quoted)
-
-        result = pattern.sub(quote_replacer, result)
-    return result
-
-
 def _is_analysis_or_rejection_text(text: str) -> bool:
     """분석·라벨·고객 거절 멘트인지 판별한다."""
     plain = _html_to_plain_text(text).strip()
@@ -985,26 +963,9 @@ def _is_fp_direct_speech(text: str) -> bool:
     return True
 
 
-def _section_is_diagnosis(header: str) -> bool:
-    return "속마음 진단" in header
-
-
 def _apply_fp_ment_boxes_in_section_body(body: str, header: str) -> str:
-    """섹션 본문의 【멘트】·명시적 멘트만 설계사 박스로 변환한다."""
-    body = _sanitize_direct_ment_artifacts(body)
-
-    def marker_replacer(match: re.Match[str]) -> str:
-        ment = match.group(1)
-        if not _is_fp_direct_speech(ment):
-            return ment.strip()
-        return build_fp_ment_box(ment)
-
-    body = DIRECT_MENT_MARKER_RE.sub(marker_replacer, body)
-
-    if not _section_is_diagnosis(header):
-        body = _wrap_fp_ment_quotes(body)
-
-    return body
+    """섹션 본문의 깨진 direct-ment 잔여만 정리(AI가 fp-ment-box HTML 직접 출력)."""
+    return _sanitize_direct_ment_artifacts(body)
 
 
 def strip_section_h4_subtitles(ai_html: str) -> str:
