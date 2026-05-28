@@ -131,7 +131,7 @@ st.markdown(
     }
 
     /* AI 출력 루트 (한 블록 렌더링용) */
-    .ai-output-root .ai-section {
+    .ai-section {
         background: linear-gradient(145deg, #fffefd 0%, #faf7f4 55%, #fff9f5 100%);
         border: 1px solid rgba(255, 102, 0, 0.2);
         border-left: 5px solid #ff6600;
@@ -145,7 +145,7 @@ st.markdown(
         word-break: keep-all;
         overflow-wrap: break-word;
     }
-    .ai-output-root .ai-section h4 {
+    .ai-section h4 {
         color: #e85d00;
         font-size: 1.12rem;
         font-weight: 800;
@@ -154,23 +154,23 @@ st.markdown(
         border-bottom: 2px solid rgba(255, 102, 0, 0.28);
         letter-spacing: -0.02em;
     }
-    .ai-output-root .ai-section p {
+    .ai-section p {
         margin: 0 0 12px 0;
     }
-    .ai-output-root .ai-section ul {
+    .ai-section ul {
         margin: 6px 0 4px 0;
         padding-left: 1.25rem;
     }
-    .ai-output-root .ai-section li {
+    .ai-section li {
         margin-bottom: 6px;
     }
-    .ai-output-root .ai-section strong {
+    .ai-section strong {
         color: #cc5200;
         font-weight: 700;
     }
 
     /* 설계사 직접 멘트 — 파란 강조 박스 */
-    .ai-output-root .fp-ment-box {
+    .fp-ment-box {
         display: block;
         background: linear-gradient(135deg, #e8f4fc 0%, #d4ebfa 55%, #cfe8f9 100%);
         border: 1px solid #90caf9;
@@ -180,7 +180,7 @@ st.markdown(
         margin: 14px 0;
         box-shadow: 0 3px 12px rgba(25, 118, 210, 0.12);
     }
-    .ai-output-root .fp-ment-header {
+    .fp-ment-header {
         display: flex;
         align-items: center;
         gap: 8px;
@@ -188,29 +188,29 @@ st.markdown(
         padding-bottom: 8px;
         border-bottom: 1px dashed rgba(25, 118, 210, 0.35);
     }
-    .ai-output-root .fp-ment-icon {
+    .fp-ment-icon {
         font-size: 1.15rem;
         line-height: 1;
     }
-    .ai-output-root .fp-ment-label {
+    .fp-ment-label {
         font-size: 0.78rem;
         font-weight: 800;
         color: #1565c0;
         letter-spacing: -0.02em;
         text-transform: none;
     }
-    .ai-output-root .fp-ment-text {
+    .fp-ment-text {
         color: #0d47a1;
         font-size: 1.02rem;
         font-weight: 600;
         line-height: 1.75;
         word-break: keep-all;
     }
-    .ai-output-root .fp-ment-text p {
+    .fp-ment-text p {
         margin: 0 0 8px 0;
         color: #0d47a1;
     }
-    .ai-output-root .fp-ment-text p:last-child {
+    .fp-ment-text p:last-child {
         margin-bottom: 0;
     }
 
@@ -1120,9 +1120,7 @@ def _render_ai_section(inner: str, section_idx: int) -> None:
         return
 
     header = h4_match.group(1)
-    body = _apply_fp_ment_boxes_in_section_body(
-        inner[h4_match.end() :].strip(), header
-    )
+    body = inner[h4_match.end():].strip()
 
     if _is_collapsible_ai_section(inner):
         preview_html, more_html = _split_section_preview_and_more(body)
@@ -1151,13 +1149,10 @@ def _render_ai_section(inner: str, section_idx: int) -> None:
 
 
 def render_analysis_result(ai_body: str, limbic_cards_html: str) -> None:
-    """분석 결과를 result-panel 안에서 st.markdown + st.expander로 렌더링한다."""
     if not (ai_body or "").strip():
         return
     st.markdown(
-        '<div class="result-panel"><div class="ai-output-root">'
-        f"{DASHBOARD_HTML}"
-        f"{limbic_cards_html}",
+        f'{DASHBOARD_HTML}{limbic_cards_html}',
         unsafe_allow_html=True,
     )
     section_blocks = _balanced_ai_section_blocks(ai_body)
@@ -1169,10 +1164,7 @@ def render_analysis_result(ai_body: str, limbic_cards_html: str) -> None:
             f'<div class="ai-section">{ai_body}</div>',
             unsafe_allow_html=True,
         )
-    st.markdown(
-        f'{CLOSING_TIP_HTML}</div></div>',
-        unsafe_allow_html=True,
-    )
+    st.markdown(CLOSING_TIP_HTML, unsafe_allow_html=True)
 
 def render_ai_result_html(html_content: str, height: int = 1280) -> None:
     """분석 결과 HTML을 iframe으로 렌더링(Streamlit 마크다운 태그 제한 회피)."""
