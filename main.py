@@ -1093,7 +1093,7 @@ def apply_direct_ment_bold(ai_html: str) -> str:
 def _split_section_preview_and_more(body: str) -> tuple[str, str | None]:
     """접을 섹션 본문을 미리보기·더보기 구간으로 나눈다."""
     units = _extract_ai_section_content_units(body)
-    if len(units) <= COLLAPSIBLE_PREVIEW_LINES:
+    if not units:
         return body, None
 
     preview_html = "".join(units[:COLLAPSIBLE_PREVIEW_LINES])
@@ -1105,6 +1105,9 @@ def _split_section_preview_and_more(body: str) -> tuple[str, str | None]:
     remainder = remainder.strip()
     if remainder:
         more_html = remainder + more_html
+
+    if not more_html:
+        return body, None
 
     return preview_html, more_html
 
@@ -1120,15 +1123,12 @@ def _render_ai_section(inner: str, section_idx: int) -> None:
         return
 
     header = h4_match.group(1)
-    body = inner[h4_match.end():].strip()
+    body = _apply_fp_ment_boxes_in_section_body(
+        inner[h4_match.end():].strip(), header
+    )
 
     if _is_collapsible_ai_section(inner):
         preview_html, more_html = _split_section_preview_and_more(body)
-        if not more_html:
-            remainder = body
-            if preview_html and preview_html in body:
-                remainder = body.replace(preview_html, "", 1).strip()
-            more_html = remainder if remainder else None
 
         if more_html:
             st.markdown(
