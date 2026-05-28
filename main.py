@@ -333,6 +333,13 @@ st.markdown(
         padding-top: 12px;
         border-top: 1px dashed rgba(255, 102, 0, 0.25);
     }
+
+    [data-testid="stExpander"] {
+        background: white;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 102, 0, 0.2);
+        margin: 8px 0;
+    }
 </style>
 """,
     unsafe_allow_html=True,
@@ -1113,10 +1120,18 @@ def _render_ai_section(inner: str, section_idx: int) -> None:
         return
 
     header = h4_match.group(1)
-    body = inner[h4_match.end() :].strip()
+    body = _apply_fp_ment_boxes_in_section_body(
+        inner[h4_match.end() :].strip(), header
+    )
 
     if _is_collapsible_ai_section(inner):
         preview_html, more_html = _split_section_preview_and_more(body)
+        if not more_html:
+            remainder = body
+            if preview_html and preview_html in body:
+                remainder = body.replace(preview_html, "", 1).strip()
+            more_html = remainder if remainder else None
+
         if more_html:
             st.markdown(
                 f'<div class="ai-section">{header}{preview_html}</div>',
@@ -1136,17 +1151,15 @@ def _render_ai_section(inner: str, section_idx: int) -> None:
 
 
 def render_analysis_result(ai_body: str, limbic_cards_html: str) -> None:
-    """분석 결과를 st.markdown + st.expander로 렌더링한다."""
+    """분석 결과를 result-panel 안에서 st.markdown + st.expander로 렌더링한다."""
     if not (ai_body or "").strip():
         return
-
     st.markdown(
         '<div class="result-panel"><div class="ai-output-root">'
         f"{DASHBOARD_HTML}"
         f"{limbic_cards_html}",
         unsafe_allow_html=True,
     )
-
     section_blocks = _balanced_ai_section_blocks(ai_body)
     if section_blocks:
         for section_idx, (_start, _end, block) in enumerate(section_blocks):
@@ -1156,12 +1169,10 @@ def render_analysis_result(ai_body: str, limbic_cards_html: str) -> None:
             f'<div class="ai-section">{ai_body}</div>',
             unsafe_allow_html=True,
         )
-
     st.markdown(
-        f"{CLOSING_TIP_HTML}</div></div>",
+        f'{CLOSING_TIP_HTML}</div></div>',
         unsafe_allow_html=True,
     )
-
 
 def render_ai_result_html(html_content: str, height: int = 1280) -> None:
     """분석 결과 HTML을 iframe으로 렌더링(Streamlit 마크다운 태그 제한 회피)."""
