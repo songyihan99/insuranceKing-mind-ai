@@ -981,7 +981,8 @@ def _is_fp_direct_speech(text: str) -> bool:
         plain,
     ) and re.search(r"(?:세요|해요|습니다|드릴게요|보시죠|까요|죠)[.!?]?$", plain):
         return True
-    return False
+    # 큰따옴표 등 10자 이상·분석/거절 키워드 없음 → 설계사 직접 멘트
+    return True
 
 
 def _section_is_diagnosis(header: str) -> bool:
@@ -1113,7 +1114,7 @@ def _split_section_preview_and_more(body: str) -> tuple[str, str | None]:
 
 
 def _render_ai_section(inner: str, section_idx: int) -> None:
-    """ai-section 1개를 렌더링(접을 섹션은 st.expander 더보기)."""
+    """ai-section 1개를 전체 본문 그대로 렌더링한다."""
     h4_match = AI_SECTION_H4_RE.search(inner)
     if not h4_match:
         st.markdown(
@@ -1126,22 +1127,6 @@ def _render_ai_section(inner: str, section_idx: int) -> None:
     body = _apply_fp_ment_boxes_in_section_body(
         inner[h4_match.end():].strip(), header
     )
-
-    if _is_collapsible_ai_section(inner):
-        preview_html, more_html = _split_section_preview_and_more(body)
-
-        if more_html:
-            st.markdown(
-                f'<div class="ai-section">{header}{preview_html}</div>',
-                unsafe_allow_html=True,
-            )
-            with st.expander("더보기", expanded=False, key=f"ai_section_more_{section_idx}"):
-                st.markdown(
-                    f'<div class="ai-section-more-body">{more_html}</div>',
-                    unsafe_allow_html=True,
-                )
-            return
-
     st.markdown(
         f'<div class="ai-section">{header}{body}</div>',
         unsafe_allow_html=True,
