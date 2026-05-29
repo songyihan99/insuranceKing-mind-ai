@@ -264,9 +264,9 @@ st.markdown(
         flex: 1 1 0;
         min-width: 0;
         text-align: center;
-        padding: 14px 6px;
+        padding: 10px 4px;
         border-radius: 12px;
-        font-size: 0.92rem;
+        font-size: 0.82rem;
         font-weight: 700;
         letter-spacing: -0.02em;
         transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -355,25 +355,46 @@ SYSTEM_INSTRUCTION = """
 - 「바이란」「BYAF」「역설적 의도」→ 금지. 같은 의미를 **전혀 다른 일상 문장**으로 치환해 써라(해당 단어 자체 포함 금지).
 - 학술·심리 전문 용어도 금지: 「방어기제」「편향」「오류」「기저」「확증」「손실 회피」「리액턴스」「반발」등.
   초등 학생도 이해하는 **생활 언어**로만 써라. 답변에서 “예시 문장”을 그대로 복사하지 말고, 매번 새로 써라.
+- "모험형", "지배형", "통제형", "균형형", "자극형", "개방형" 이 6개 단어는 출력 금지.
+  대신 반드시 아래 7가지 유형명만 사용해라: 전통주의자, 조화론자, 개방주의자, 쾌락주의자, 모험가, 실행가, 규율숭배자
 
-## 6대 감정 축 분석 기준 (내부 판단용, 출력은 일상어로 풀어쓰기)
-- 모험: 리스크를 감수하고 기회나 트렌드를 쫓는 쪽
-- 지배: 주도권을 쥐고 싶어 하고 자기 판단을 강하게 믿는 쪽
-- 통제/규율: 손해, 사기, 약관, 보험금 지급 여부를 꼼꼼하게 따지는 쪽
-- 균형: 익숙한 상태를 유지하고 이미 있는 것을 바꾸기 싫어하는 쪽
-- 자극: 당장 체감되는 실리, 가성비, 비용 부담을 가장 크게 보는 쪽
-- 개방/관용: 관계를 중시하고 갈등을 피하려 하며 결정을 뒤로 미루는 쪽
+## 7가지 유형 분석 기준 (내부 판단용, 출력은 일상어로 풀어쓰기)
+- 전통주의자: 안정·신뢰·변화 거부, 이미 있는 것을 유지하려는 성향
+- 조화론론자: 가정·돌봄·화합 중시, 타인과의 관계를 중요시하며 결정을 미루는 성향
+- 개방주의자: 체험·즐거움·긍정적 생활 추구, 문화·이벤트·새로운 만남 선호
+- 쾌락주의자: 새로운 것·트렌드·즉각적 자극 추구, 얼리어답터 성향
+- 모험가: 전투적·충동적·성능과 스릴 추구, 리스크 감수형
+- 실행가: 야심·목표·지위·자기과시, 영리한 소비 추구
+- 규율숭배자: 불신·비관·기능성만 추구, 쓸데없는 지출 극도로 거부
 
-- 반드시 위 6개 중 **최상위 감정 1가지만** 고른다.
-- 판정 유형 이름(모험형/지배형/통제형/균형형/자극형/개방형)은 섹션1 첫 번째 또는 두 번째 문장에 반드시 정확한 단어 그대로 1회 출력해야 한다. '자극 쪽', '자극적인' 같은 변형 표현 금지. 반드시 '자극형'처럼 '형'을 붙인 정확한 단어만 사용해라.
-- 출력에는 "가장 크게 움직이는 마음은 균형 쪽입니다"처럼 일상어로 풀어 쓴다.
+- 반드시 위 7개 중 최상위 유형 1가지만 고른다.
 - 특히 아래 표현은 우선 이렇게 본다:
-  - "안 바꿀래", "이미 있다" → 균형
-  - "보험료 부담", "비싸다" → 자극
-  - "돈 아깝게 왜 새로" → 지배
-  - "보험사들이 안 준다" → 통제/규율
-  - "주식", "코인", "돈 묶이기 싫다" → 모험
-  - 지인 관계 때문에 결정을 미루는 문맥 → 개방/관용
+  - "이미 보험 있어 안 바꿀래", "굳이 바꿀 필요 없잖아요" → 전통주의자
+  - "남편이랑 얘기해야 해", "생각해볼게요", "가족이랑 상의할게요" → 조화론자
+  - "지금은 여행이나 즐길래", "문화생활에 쓰고 싶어요" → 개방주의자
+  - "더 좋은 상품 나오면 그때 가입할게요" → 쾌락주의자
+  - "그 돈으로 주식이나 코인 하는 게 낫지", "투자가 더 나아" → 모험가
+  - "내가 알아서 할게요", "제 판단을 믿어요" → 실행가
+  - "보험사가 어차피 돈 안 줄걸요", "보험료 부담돼서 안 해", "쓸데없는 데 돈 쓰기 싫어요" → 규율숭배자
+
+### 유형별 세일즈 타격 포인트
+- 전통주의자: 오랫동안 검증된 품질 신뢰도와 브랜드 안정성 강조.
+  "많은 분들이 이미 선택한 검증된 상품입니다" 방향으로.
+- 조화론자: "가족을 지키는 안도감" 중심 서사.
+  직계 가족·지인의 리모델링 성공 경험 사례 매칭.
+- 개방주의자: 보험이 주는 미래의 심리적 여유와
+  긍정적인 라이프케어 가치 제시.
+- 쾌락주의자: 복잡한 특약 설명 배제.
+  한화손보만의 최신 트렌디 특약과 우대 혜택 강조.
+- 모험가: 업계 압도적 보장 횟수(최대 11회) 등
+  가시적 고성능 지표 팩트 중심으로 강조.
+- 실행가: 철저한 가격비교 우위 입증.
+  "남들보다 훨씬 영리하게 지갑을 방어하는 소비"임을 자극.
+- 규율숭배자: 철저한 약관 근거 제시.
+  예기치 못한 부지급 리스크를 원천 차단하는
+  법적 비용 실손 담보 매칭.
+- 섹션4 상품 추천 시 위 유형별 타격 포인트에 맞춰
+  멘트와 상품 특약을 강조해라.
 
 ## 설득 소통 원칙 (섹션별 필수 적용)
 
@@ -529,13 +550,21 @@ SYSTEM_INSTRUCTION = """
 - `direct-ment` 및 깨진 HTML 태그 조각(열리지 않은 `>` 잔여 등) 출력 금지. fp-ment-box는 위 템플릿 구조로만 출력.
 """
 
-LIMBIC_AXIS_TYPES = ("모험형", "지배형", "통제형", "균형형", "자극형", "개방형")
+LIMBIC_AXIS_TYPES = (
+    "전통주의자",
+    "조화론론자",
+    "개방주의자",
+    "쾌락주의자",
+    "모험가",
+    "실행가",
+    "규율숭배자",
+)
 
 LIMBIC_TYPE_MARKER_RE = re.compile(
     r"【\s*유형\s*:\s*(모험형|지배형|통제형|균형형|자극형|개방형)\s*】"
 )
 LIMBIC_TYPE_WORD_RE = re.compile(
-    r"(모험형|지배형|통제형|균형형|자극형|개방형)"
+    r"(전통주의자|조화론론자|개방주의자|쾌락주의자|모험가|실행가|규율숭배자)"
 )
 
 AI_SECTION_BLOCK_RE = re.compile(
@@ -635,13 +664,63 @@ DASHBOARD_HTML = (
     "<hr>"
 )
 
-CLOSING_TIP_HTML = """
+CLOSING_TIP_HTML_DEFAULT = """
 <div class="byaf-tip-box">
     💡 <strong>[AI 비서의 클로징 팁]:</strong>
     가입을 재촉하기보다, 고객이 비교할 기준과 확인할 포인트를 분명히 알려주고 선택권을 존중해 주세요.
     오해 없는 설명과 자율적인 비교 기회가 신뢰를 만들고 더 좋은 결정을 돕습니다.
 </div>
 """
+
+_LIMBIC_CLOSING_TIP_CONTENT: dict[str, tuple[str, str]] = {
+    "전통주의자": (
+        "전통주의자 공략 포인트",
+        "오랫동안 검증된 사례를 먼저 보여주세요. 검증이 확인되면 장기 단골이 됩니다.",
+    ),
+    "조화론자": (
+        "조화론자 공략 포인트",
+        "가족 이야기로 접근하세요. 가정의 안녕이 설득의 핵심입니다.",
+    ),
+    "개방주의자": (
+        "개방주의자 공략 포인트",
+        "보험이 주는 삶의 여유를 강조하세요. 긍정적인 미래 가치가 이 유형을 움직입니다.",
+    ),
+    "쾌락주의자": (
+        "쾌락주의자 공략 포인트",
+        "최신 특약과 혜택만 간결하게 보여주세요. 복잡한 설명은 역효과입니다.",
+    ),
+    "모험가": (
+        "모험가 공략 포인트",
+        "숫자로 압도하세요. 최대 11회 같은 업계 최고 지표가 이 유형을 설득합니다.",
+    ),
+    "실행가": (
+        "실행가 공략 포인트",
+        "가격 우위를 증명하세요. 남들보다 영리한 소비임을 자극하면 됩니다.",
+    ),
+    "규율숭배자": (
+        "규율숭배자 공략 포인트",
+        "약관 근거를 투명하게 제시하세요. 불신을 해소하는 순간 계약으로 이어집니다.",
+    ),
+}
+
+
+def build_closing_tip_html(limbic_type: str | None) -> str:
+    """감지된 림빅 유형에 맞는 클로징 팁 HTML. 미감지 시 기본 팁."""
+    if not limbic_type:
+        return CLOSING_TIP_HTML_DEFAULT
+    tip = _LIMBIC_CLOSING_TIP_CONTENT.get(limbic_type.strip())
+    if not tip:
+        return CLOSING_TIP_HTML_DEFAULT
+    title, body = tip
+    return (
+        '<div class="byaf-tip-box">\n'
+        f"    💡 <strong>{title}</strong><br>\n"
+        f"    {body}\n"
+        "</div>"
+    )
+
+
+CLOSING_TIP_HTML = CLOSING_TIP_HTML_DEFAULT
 
 DEFAULT_WEAPON_TEXT = """
 [기본 무기] 상품명: 무배당 한화 시그니처 여성 건강보험 4.0
@@ -1200,8 +1279,8 @@ def render_ai_result_html(html_content: str, height: int = 1280) -> None:
         ".ai-output-root .ai-section p{margin:0 0 12px;}"
         ".ai-output-root .ai-section strong{color:#cc5200;font-weight:700;}"
         ".limbic-axis-cards{display:flex;gap:10px;margin:0 0 22px;}"
-        ".limbic-axis-card{flex:1;text-align:center;padding:14px 6px;border-radius:12px;"
-        "font-weight:700;font-size:0.92rem;}"
+        ".limbic-axis-card{flex:1 1 0;min-width:0;text-align:center;padding:10px 4px;border-radius:12px;"
+        "font-weight:700;font-size:0.82rem;}"
         ".limbic-axis-card--active{background:linear-gradient(145deg,#ff6600,#e55a00);"
         "color:#fff;border:2px solid #ff6600;}"
         ".limbic-axis-card--inactive{background:#e8e8e8;color:#888;border:2px solid #d0d0d0;}"
@@ -1698,6 +1777,7 @@ with col_result:
         ai_body = repair_ai_html_display(ai_body)
         ai_body = apply_direct_ment_bold(ai_body)
         limbic_cards_html = build_limbic_axis_cards_html(limbic_type)
+        CLOSING_TIP_HTML = build_closing_tip_html(limbic_type)
         render_analysis_result(ai_body, limbic_cards_html)
     else:
         st.markdown(
