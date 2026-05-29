@@ -432,12 +432,12 @@ SYSTEM_INSTRUCTION = """
 - 사례 마지막에 "한번 같이 확인만 해보시죠"처럼 작은 부탁으로 자연스럽게 연결해라.
 
 ### 섹션3 (클로징) 필수 기법
-- 반드시 이 순서로 써라:
-  1) 먼저 풀보장 고급 플랜 기준을 언급한다. (예: "풀보장으로 구성하면 월 15만 원대입니다.")
-  2) 바로 이어서 현재 제안 상품이 얼마나 합리적인지 대비해서 설명한다. (기준점 대비 싸게 느끼게)
-  3) 월 보험료를 반드시 "하루 커피 한 잔 값", "담배 한 갑 아끼는 돈"으로 환산해서 표현해라.
-  4) "지금 이 보장 없이 지내신다면, 매달 이 위험은 고스란히 고객님 몫입니다"처럼 현재 상태의 손실을 한 문장으로 명확히 언급해라.
-  5) 반드시 "안 하셔도 됩니다. 다른 곳과 비교해 보세요"로 마무리해라.
+- 섹션3은 반드시 이 순서로 써라:
+  1. 먼저 풀보장 고급 플랜 기준 언급 (예: "풀보장으로 구성하면 월 15만 원대입니다")
+  2. 현재 제안 상품이 얼마나 합리적인지 대비 설명
+  3. 월 보험료를 "맛있는 밥 한 끼 값" 으로 환산해서 표현
+  4. "지금 이 보장 없이 지내신다면, 매달 이 위험은 고스란히 고객님 몫입니다" 손실 한 문장 필수
+  5. "안 하셔도 됩니다. 다른 곳과 비교해 보세요"로 마무리
 
 ### 섹션4 (무기) 필수 기법
 - 상품 소개 전에 반드시 "지금 이 보장이 없으면 [구체적 상황]에서 [구체적 손실]이 생깁니다"를 한 문장으로 먼저 써라.
@@ -491,6 +491,7 @@ SYSTEM_INSTRUCTION = """
 
 ### 섹션 1 → `<h4>🔴 [고객의 진짜 속마음 진단]</h4>`
 - 본문 해설은 **3문장 이내**로 압축한다(위 분량 규칙 준수).
+- 고객에게 유형명(전통주의자, 규율숭배자 등)을 직접 말하지 마라. 진단 결과는 설계사 내부 참고용이며, 고객에게는 공감 멘트로만 전달해라.
 - 거절 멘트로 위 6대 감정 축 중 가장 강하게 발동한 최상위 감정 1가지를 판정한다.
 - 판정 유형은 **모험형·지배형·통제형·균형형·자극형·개방형** 중 정확한 이름 1개를 섹션1 본문에 반드시 1회 쓴다(예: `균형형`).
 - 그 외 설명은 일상어로 풀되, 위 6개 유형명 이외의 축 이름(모험·규율 등 단독 표기)은 쓰지 마라.
@@ -514,10 +515,12 @@ SYSTEM_INSTRUCTION = """
 
 ### 섹션 3 → `<h4>💸 [부담을 0으로 만드는 쿨한 클로징]</h4>`
 - 본문 해설은 **2문장 이내**로 압축한다(위 분량 규칙 준수).
-- 먼저 비용 비교의 기준점을 투명하게 제시한다. 예: 현재 내는 보험료 대비 비어 있는 보장, 같은 월 부담 안에서 보완 가능한 항목, 기존 보장과 새 제안의 차이.
-- 실제 보험료를 모르면 금액을 지어내지 말고, 월 부담 수준과 보장 범위를 비교하는 기준만 설명한다.
-- 고객이 가격 저항을 이해할 수 있도록 "왜 이 비용이 추가 지출이 아니라 보장 구조 점검인지"를 담백하게 풀어라.
-- 마지막은 반드시 자율 선택을 보장하는 대화체로 마무리하라. 예: 다른 회사와 비교해도 괜찮고, 다만 어떤 기준만은 꼭 확인해 보시라는 식의 중립적 안내.
+- 섹션3은 반드시 이 순서로 써라:
+  1. 먼저 풀보장 고급 플랜 기준 언급 (예: "풀보장으로 구성하면 월 15만 원대입니다")
+  2. 현재 제안 상품이 얼마나 합리적인지 대비 설명
+  3. 월 보험료를 "맛있는 밥 한 끼 값" 으로 환산해서 표현
+  4. "지금 이 보장 없이 지내신다면, 매달 이 위험은 고스란히 고객님 몫입니다" 손실 한 문장 필수
+  5. "안 하셔도 됩니다. 다른 곳과 비교해 보세요"로 마무리
 - 고객에게 읽을 클로징 멘트는 fp-ment-box HTML로 출력, 비용 비교 해설은 일반 텍스트.
 - 가입 독촉, 압박, 조급함 유도는 금지.
 - 매번 문장 길이/끊어 읽기/멘트 배치를 바꿔서, 복붙 같은 느낌이 나지 않게 써라.
@@ -927,15 +930,77 @@ def _pick_primary_limbic_type(plain: str) -> str | None:
 
 
 def parse_limbic_axis_type(ai_html: str) -> str | None:
-    """AI 응답에서 6축 유형 단어(모험형·지배형 등)만 찾아 카드 하이라이트용으로 반환한다."""
+    """AI 응답에서 7가지 유형명을 찾아 카드 하이라이트용으로 반환한다."""
+    _DETECT_TYPES = (
+        "전통주의자",
+        "조화론자",
+        "개방주의자",
+        "쾌락주의자",
+        "모험가",
+        "실행가",
+        "규율숭배자",
+    )
+    _TYPE_WORD_RE = re.compile(
+        r"(전통주의자|조화(?:론(?:론)?)?자|개방주의자|쾌락주의자|모험가|실행가|규율숭배자)"
+    )
+    _TYPE_MARKER_RE = re.compile(
+        r"【\s*유형\s*:\s*(전통주의자|조화(?:론(?:론)?)?자|개방주의자|쾌락주의자|모험가|실행가|규율숭배자)\s*】"
+    )
+
+    def _resolve_type(raw: str) -> str | None:
+        match = _TYPE_WORD_RE.search(raw.strip())
+        if not match:
+            return None
+        matched = match.group(1)
+        if matched.startswith("조화"):
+            for axis_name in LIMBIC_AXIS_TYPES:
+                if axis_name.startswith("조화"):
+                    return axis_name
+            return "조화론자"
+        if matched in LIMBIC_AXIS_TYPES:
+            return matched
+        if matched in _DETECT_TYPES:
+            return matched
+        return None
+
+    def _ordered_unique_types(text: str) -> list[str]:
+        seen: set[str] = set()
+        ordered: list[str] = []
+        for match in _TYPE_WORD_RE.finditer(text):
+            resolved = _resolve_type(match.group(1))
+            if resolved and resolved not in seen:
+                seen.add(resolved)
+                ordered.append(resolved)
+        return ordered
+
+    def _pick_primary(plain: str) -> str | None:
+        if not plain:
+            return None
+        for type_name in _DETECT_TYPES:
+            patterns = [re.escape(type_name)]
+            if type_name == "조화론자":
+                patterns.append(r"조화(?:론(?:론)?)?자")
+            for pattern in patterns:
+                if re.search(
+                    rf"(?:유형|판정|해당|최상위|분류|경향)[^。\n]{{0,32}}{pattern}",
+                    plain,
+                ):
+                    return _resolve_type(type_name)
+                if re.search(
+                    rf"{pattern}\s*(?:입니다|이니다|으로|임|에 해당|쪽|에 가깝)",
+                    plain,
+                ):
+                    return _resolve_type(type_name)
+        ordered = _ordered_unique_types(plain)
+        return ordered[0] if ordered else None
+
     if not (ai_html or "").strip():
         return None
 
-    marker_match = LIMBIC_TYPE_MARKER_RE.search(ai_html)
+    marker_match = _TYPE_MARKER_RE.search(ai_html)
     if marker_match:
-        return marker_match.group(1)
+        return _resolve_type(marker_match.group(1))
 
-    # ai-section 인용부호 형태(" 또는 ')에 상관없이 진단 구간을 우선 탐색
     section_match = re.search(
         r"<div\s+class=[\"']ai-section[\"']\s*>",
         ai_html,
@@ -946,22 +1011,21 @@ def parse_limbic_axis_type(ai_html: str) -> str | None:
     else:
         diagnosis_html = extract_diagnosis_section_html(ai_html)
 
-    # HTML 원문에서 먼저 직접 탐색(태그 제거 과정의 손실 방지)
-    diagnosis_html_match = LIMBIC_TYPE_WORD_RE.search(diagnosis_html)
+    diagnosis_html_match = _TYPE_WORD_RE.search(diagnosis_html)
     if diagnosis_html_match:
-        return diagnosis_html_match.group(1)
+        return _resolve_type(diagnosis_html_match.group(1))
 
     diagnosis_plain = _html_to_plain_text(diagnosis_html)
-    diagnosis_primary = _pick_primary_limbic_type(diagnosis_plain)
+    diagnosis_primary = _pick_primary(diagnosis_plain)
     if diagnosis_primary:
         return diagnosis_primary
 
-    full_html_match = LIMBIC_TYPE_WORD_RE.search(ai_html)
+    full_html_match = _TYPE_WORD_RE.search(ai_html)
     if full_html_match:
-        return full_html_match.group(1)
+        return _resolve_type(full_html_match.group(1))
 
     full_plain = _html_to_plain_text(ai_html)
-    full_primary = _pick_primary_limbic_type(full_plain)
+    full_primary = _pick_primary(full_plain)
     if full_primary:
         return full_primary
 
