@@ -268,9 +268,6 @@ st.markdown(
         border-radius: 12px;
         font-size: 0.82rem;
         font-weight: 700;
-        letter-spacing: -0.02em;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-        border: 2px solid transparent;
     }
     .limbic-axis-card--active {
         background: linear-gradient(145deg, #ff6600 0%, #e55a00 100%);
